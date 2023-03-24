@@ -16,12 +16,16 @@ function addItem(e){
   // Get input value
   var newItem = document.getElementById('item').value;
 
+  var itemDescription = document.getElementById('description').value;
+
   // Create new li element
   var li = document.createElement('li');
   // Add class
   li.className = 'list-group-item';
   // Add text node with input value
   li.appendChild(document.createTextNode(newItem));
+
+  li.appendChild(document.createTextNode(itemDescription));
 
   // Create del button element
   var deleteBtn = document.createElement('button');
@@ -68,10 +72,15 @@ function filterItems(e){
   // Convert to an array
   Array.from(items).forEach(function(item){
     var itemName = item.firstChild.textContent;
+    var desc = item.firstChild.nextSibling.textContent;
+    console.log(desc);
+    console.log(item.children[1].textContent);
     if(itemName.toLowerCase().indexOf(text) != -1){
       item.style.display = 'block';
-    } else {
-      item.style.display = 'none';
+    } else if(desc.toLowerCase().indexOf(text) != -1){
+      item.style.display = 'block';
+    } else{
+        item.style.display = 'none';
     }
   });
 }
